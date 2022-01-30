@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:,">
+  <title>minimal-routing</title>
+</head>
+
+<body>
+  <header>
+    <button data-router data-route="home">Go to the home page</button>
+    <button data-router data-route="page_1">Go to page 1</button>
+    <button data-router data-route="page_2">Go to page 2</button>
+    <button data-router data-route="page_3">Go to page 3</button>
+  </header>
+
+  <main>
+    <article data-page data-route="home">
+      Hello from the home page!
+    </article>
+    <article data-page data-route="page_1">
+      Hello from page 1!
+    </article>
+    <article data-page data-route="page_2">
+      Hello from page 2!
+    </article>
+    <article data-page data-route="page_3">
+      Hello from page 3!
+    </article>
+  </main>
+
+  <script>
+    const routers = document.querySelectorAll('[data-router]');
+    const main = document.querySelector('main');
+    const pages = Array.from(document.querySelectorAll('[data-page]')); // Must convert to array to preserve elements
+
+    // Display the appropriate page based on the URL path
+    function route(path) {
+      if (path === '') {
+        path = 'home';
+      }
+
+      let match = false;
+      for (const page of pages) {
+        if (page.dataset.route === path) {
+          main.appendChild(page);
+          match = true;
+        }
+        else {
+          page.remove();
+        }
+      }
+      if (!match) {
+        // MUST redirect to a page where the web server serves an actual 404 error (i.e. not just 
+        // index.html again) otherwise this triggers an infinite loop
+        window.location.href = `${window.location.protocol}//${window.location.host}/errors/404.html`;
+      }
+    }
+
+    // Update the browser history, then route
+    function changePage(path) {
+      // If the new page is equal to the current page, don't do anything
+      if (window.location.pathname.substring(1) === path) {
+        return;
+      }
+
+      const base = new URL(`${window.location.protocol}//${window.location.host}`);
+      const url = new URL(path, base);
+      window.history.pushState({}, '', url);
+
+      route(path);
+    }
+
+    // Set event handlers
+    for (const router of routers) {
+      router.addEventListener('click', e => changePage(e.target.dataset.route));
+    }
+    window.onpopstate = _ => route(window.location.pathname.substring(1));
+
+    // Route to the current URL (to support direct linking aka deep links)
+    route(window.location.pathname.substring(1));
+  </script>
+</body>
+
+</html>
