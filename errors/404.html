@@ -6,11 +6,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="data:,">
   <title>404 Not Found</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
+      background: hsl(275deg 10% 90%);
+      color: hsl(275deg 90% 10%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    a {
+      color: hsl(275deg 50% 50%);
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 4px;
+      transition: background-color 400ms;
+    }
+
+    a:hover,
+    a:focus {
+      text-decoration: underline;
+      background: hsl(275deg 20% 85%);
+      transition: background-color 150ms;
+    }
+  </style>
 </head>
 
 <body>
-  <h1>404 Not Found</h1>
-  <p>The requested page does not exist.</p>
+  <header>
+    <h1>404 Not Found</h1>
+  </header>
+
+  <main>
+    <p>The requested page does not exist. <a href="/">Click here</a> to return to the homepage.</p>
+  </main>
 </body>
 
 </html>
