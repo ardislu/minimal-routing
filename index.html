@@ -10,10 +10,10 @@
 
 <body>
   <header>
-    <button data-router data-route="home">Go to the home page</button>
-    <button data-router data-route="page_1">Go to page 1</button>
-    <button data-router data-route="page_2">Go to page 2</button>
-    <button data-router data-route="page_3">Go to page 3</button>
+    <a data-router data-route="home" href="/home">Go to the home page</a>
+    <a data-router data-route="page_1" href="/page_1">Go to page 1</a>
+    <a data-router data-route="page_2" href="/page_2">Go to page 2</a>
+    <a data-router data-route="page_3" href="/page_3">Go to page 3</a>
   </header>
 
   <main>
@@ -75,7 +75,10 @@
 
     // Set event handlers
     for (const router of routers) {
-      router.addEventListener('click', e => route(e.target.dataset.route));
+      router.addEventListener('click', e => {
+        e.preventDefault();
+        route(e.target.dataset.route)
+      });
     }
     window.onpopstate = _ => showPage(window.location.pathname.substring(1));
 
