@@ -162,7 +162,7 @@
     for (const router of routers) {
       router.addEventListener('click', e => {
         e.preventDefault();
-        route(e.target.dataset.route)
+        route(e.target.dataset.route);
       });
     }
     window.onpopstate = _ => showPage(window.location.pathname.substring(1));
