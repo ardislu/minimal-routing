@@ -151,8 +151,7 @@
         return;
       }
 
-      const base = new URL(`${window.location.origin}`);
-      const url = new URL(path, base);
+      const url = new URL(path, window.location.origin);
       window.history.pushState({}, '', url);
 
       showPage(path);
