@@ -164,7 +164,7 @@
         route(e.target.dataset.route);
       });
     }
-    window.onpopstate = _ => showPage(window.location.pathname.substring(1));
+    window.addEventListener('popstate', _ => showPage(window.location.pathname.substring(1)));
 
     // Show the current URL (to support direct linking aka deep links)
     showPage(window.location.pathname.substring(1));
