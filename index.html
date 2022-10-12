@@ -64,6 +64,14 @@
       padding: 0 3px;
     }
 
+    kbd {
+      background: hsl(275deg 25% 85%);
+      border-radius: 4px;
+      border: 1px solid hsl(275deg 20% 85%);
+      box-shadow: 0 1px 1px hsl(275deg 10% 10% / 40%), 0 2px 0 0 hsl(275deg 100% 97% / 70%) inset;
+      padding: 2px 4px;
+    }
+
     p.subtitle {
       font-weight: 700;
     }
@@ -107,6 +115,7 @@
         <ul>
           <li>The backward and forward buttons need to work as expected.</li>
           <li>Direct links to specific pages need to work.</li>
+          <li>Middle click, <kbd>Ctrl</kbd> / <kbd>Cmd</kbd> click, <kbd>Shift</kbd> click, and "right click > open link in new tab" all need to work on links and link-like buttons as expected.</li>
           <li>Invalid routes need to return <code>HTTP 404</code> errors (this behavior is critical for <dfn><abbr title="Search Engine Optimization">SEO</abbr></dfn>).</li>
         </ul>
         <p>The purpose of this website is to isolate the problem of client-side routing and provide a minimal reference implementation for it.</p>
@@ -160,6 +169,10 @@
     // Set event handlers
     for (const router of routers) {
       router.addEventListener('click', e => {
+        if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) {
+          return; // Use default behavior if any keyboard modifier is applied to the click
+        }
+
         e.preventDefault();
         route(e.target.dataset.route);
       });
