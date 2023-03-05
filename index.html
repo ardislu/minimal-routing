@@ -138,7 +138,7 @@
 
     // Display the appropriate page based on the URL path (does NOT modify browser history)
     function showPage(path) {
-      if (path === '') {
+      if (path === '' || path === 'index.html') {
         path = 'home';
       }
 
