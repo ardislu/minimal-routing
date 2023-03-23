@@ -20,25 +20,28 @@
       margin-inline: auto;
     }
 
-    header,
-    main {
+    header {
       display: flex;
       justify-content: center;
-    }
-
-    header {
       border-block-end: 2px solid hsl(275deg 90% 10%);
       margin-block-end: 8px;
     }
 
+    main {
+      display: grid;
+      grid-template:
+        "nav content"
+        / 1fr 4fr;
+    }
+
     nav {
-      flex-basis: 20%;
+      grid-area: nav;
       display: flex;
       flex-direction: column;
     }
 
     section {
-      flex-basis: 80%;
+      grid-area: content;
       display: flex;
       flex-direction: column;
     }
@@ -80,6 +83,24 @@
 
     p.subtitle {
       font-weight: 700;
+    }
+    
+    @media (max-width: 800px) {
+      main {
+        grid-template: 
+          "nav"
+          "content";
+      }
+
+      nav {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      nav>a {
+        padding: 16px;
+        margin-inline-end: 0;
+      }
     }
   </style>
 </head>
