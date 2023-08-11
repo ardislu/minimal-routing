@@ -84,7 +84,11 @@
     p.subtitle {
       font-weight: 700;
     }
-    
+
+    div.force-scroll {
+      block-size: 200vh;
+    }
+
     @media (max-width: 800px) {
       main {
         grid-template: 
@@ -145,10 +149,23 @@
           <li>Middle click, <kbd>Ctrl</kbd> / <kbd>Cmd</kbd> click, <kbd>Shift</kbd> click, and "right click > open link in new tab" all need to work on links and link-like buttons as expected.</li>
           <li>Invalid routes need to return <code>HTTP 404</code> errors (this behavior is critical for <dfn><abbr title="Search Engine Optimization">SEO</abbr></dfn>).</li>
           <li>When hovering links and link-like buttons, the web browser's native status bar (typically shown at the bottom-left of the window) needs to show the destination address.</li>
+          <li>When navigating between long pages with scrollbars, the scroll should reset to the top of the page. <a data-router data-route="long_page_1" href="/long_page_1">Click here to see a demo</a>.</li>
         </ul>
         <p>The purpose of this website is to isolate the problem of client-side routing and provide a minimal reference implementation for it.</p>
         <p>All the behaviors above have been implemented for this website in about 50 total lines of JavaScript.</p>
         <p><a href="https://github.com/ardislu/minimal-routing">Click here</a> to view the source code on GitHub.</p>
+      </article>
+      <article data-page data-route="long_page_1">
+        <p class="subtitle">This page is intentionally oversized. Scroll down to go to <code>/long_page_2</code>.</p>
+        <p>Or <a data-router data-route="page_3" href="/page_3">click here</a> to go back to <code>/page_3</code>.</p>
+        <div class="force-scroll"></div>
+        <p><a data-router data-route="long_page_2" href="/long_page_2">Click here</a> to go to <code>/long_page_2</code>.</p>
+      </article>
+      <article data-page data-route="long_page_2">
+        <p class="subtitle">The scroll should have been reset to the top when you entered this page.</p>
+        <p>Single-page apps that do not explicitly implement this behavior would have you enter this page with the scroll bar already scrolled down (to match your scroll on <code>/long_page_1</code>).</p>
+        <div class="force-scroll"></div>
+        <p><a data-router data-route="long_page_1" href="/long_page_1">Click here</a> to go back to <code>/long_page_1</code>.</p>
       </article>
     </section>
   </main>
@@ -192,6 +209,8 @@
       window.history.pushState({}, '', url);
 
       showPage(path);
+      // Must reset scroll otherwise a user entering a long page from another long page will enter midway scrolled
+      scroll(0, 0);
     }
 
     // Set event handlers
