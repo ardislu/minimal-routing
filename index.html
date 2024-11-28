@@ -171,7 +171,7 @@
   </main>
 
   <script>
-    const routers = document.querySelectorAll('[data-router]');
+    const routers = Array.from(document.querySelectorAll('[data-router]')); // Put into array to use .includes
     const content = document.querySelector('section');
     const pages = document.querySelectorAll('[data-page]');
 
@@ -214,16 +214,17 @@
     }
 
     // Set event handlers
-    for (const router of routers) {
-      router.addEventListener('click', e => {
-        if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) {
-          return; // Use default behavior if any keyboard modifier is applied to the click
-        }
+    addEventListener('click', e => {
+      if (!routers.includes(e.target)) {
+        return;
+      }
+      if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) {
+        return; // Use default behavior if any keyboard modifier is applied to the click
+      }
 
-        e.preventDefault();
-        route(e.target.dataset.route);
-      });
-    }
+      e.preventDefault();
+      route(e.target.dataset.route);
+    });
     addEventListener('popstate', _ => showPage(location.pathname.substring(1)));
 
     // Show the current URL (to support direct linking aka deep links)
