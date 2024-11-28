@@ -91,7 +91,7 @@
 
     @media (max-width: 800px) {
       main {
-        grid-template: 
+        grid-template:
           "nav"
           "content";
       }
@@ -173,7 +173,7 @@
   <script>
     const routers = document.querySelectorAll('[data-router]');
     const content = document.querySelector('section');
-    const pages = Array.from(document.querySelectorAll('[data-page]')); // Must convert to array to preserve elements
+    const pages = document.querySelectorAll('[data-page]');
 
     // Display the appropriate page based on the URL path (does NOT modify browser history)
     function showPage(path) {
