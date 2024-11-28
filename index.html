@@ -194,19 +194,19 @@
       if (!match) {
         // MUST redirect to a page where the web server serves an actual 404 error (i.e. not just 
         // index.html again) otherwise this triggers an infinite loop
-        window.location.href = `${window.location.origin}/errors/NotFound`;
+        location.href = `${location.origin}/errors/NotFound`;
       }
     }
 
     // Update the browser history, then show page
     function route(path) {
       // If the new page is equal to the current page, don't do anything
-      if (window.location.pathname.substring(1) === path) {
+      if (location.pathname.substring(1) === path) {
         return;
       }
 
-      const url = new URL(path, window.location.origin);
-      window.history.pushState({}, '', url);
+      const url = new URL(path, location.origin);
+      history.pushState({}, '', url);
 
       showPage(path);
       // Must reset scroll otherwise a user entering a long page from another long page will enter midway scrolled
@@ -224,10 +224,10 @@
         route(e.target.dataset.route);
       });
     }
-    window.addEventListener('popstate', _ => showPage(window.location.pathname.substring(1)));
+    addEventListener('popstate', _ => showPage(location.pathname.substring(1)));
 
     // Show the current URL (to support direct linking aka deep links)
-    showPage(window.location.pathname.substring(1));
+    showPage(location.pathname.substring(1));
   </script>
 </body>
 
