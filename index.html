@@ -40,10 +40,8 @@
       flex-direction: column;
     }
 
-    section {
+    article {
       grid-area: content;
-      display: flex;
-      flex-direction: column;
     }
 
     nav>a {
@@ -122,57 +120,55 @@
       <a data-router data-route="page_3" href="/page_3">Page 3</a>
     </nav>
 
-    <section>
-      <article data-page data-route="home">
-        <p class="subtitle">Hello from the home page! 🏠</p>
-        <p>This is the page at the root of the website.</p>
-        <p><a data-router data-route="page_1" href="/page_1">Click here</a> to go to <code>/page_1</code>, which is a completely different page from this one.</p>
-      </article>
-      <article data-page data-route="page_1">
-        <p class="subtitle">As promised, this is a completely different page.</p>
-        <p>Look at the URL path - it changed.</p>
-        <p>But this page loaded instantly. If you observe the network tab in DevTools, no network requests have been made.</p>
-        <p>And if you observe the DOM, only this <code>&lt;article&gt;</code> tag has changed.</p>
-        <p>How does this work? <a data-router data-route="page_2" href="/page_2">Click here</a> to go to <code>/page_2</code> and find out.</p>
-      </article>
-      <article data-page data-route="page_2">
-        <p class="subtitle">All the routing logic has been implemented client-side in JavaScript.</p>
-        <p>We've actually never left the root <code>index.html</code> page - check the source.</p>
-        <p>This behavior is the eponymous characteristic of an <dfn><abbr title="Single Page Application">SPA</abbr></dfn>.</p>
-        <p><a data-router data-route="page_3" href="/page_3">Click here</a> to go to <code>/page_3</code> and learn more.</p>
-      </article>
-      <article data-page data-route="page_3">
-        <p class="subtitle">There are a few important behaviors that are often overlooked when implementing client-side routing:</p>
-        <ul>
-          <li>The backward and forward buttons need to work as expected.</li>
-          <li>Direct links to specific pages need to work.</li>
-          <li>Middle click, <kbd>Ctrl</kbd> / <kbd>Cmd</kbd> click, <kbd>Shift</kbd> click, and "right click > open link in new tab" all need to work on links and link-like buttons as expected.</li>
-          <li>Invalid routes need to return <code>HTTP 404</code> errors (this behavior is critical for <dfn><abbr title="Search Engine Optimization">SEO</abbr></dfn>).</li>
-          <li>When hovering links and link-like buttons, the web browser's native status bar (typically shown at the bottom-left of the window) needs to show the destination address.</li>
-          <li>When navigating between long pages with scrollbars, the scroll should reset to the top of the page. <a data-router data-route="long_page_1" href="/long_page_1">Click here to see a demo</a>.</li>
-        </ul>
-        <p>The purpose of this website is to isolate the problem of client-side routing and provide a minimal reference implementation for it.</p>
-        <p>All the behaviors above have been implemented for this website in about 50 total lines of JavaScript.</p>
-        <p><a href="https://github.com/ardislu/minimal-routing">Click here</a> to view the source code on GitHub.</p>
-      </article>
-      <article data-page data-route="long_page_1">
-        <p class="subtitle">This page is intentionally oversized. Scroll down to go to <code>/long_page_2</code>.</p>
-        <p>Or <a data-router data-route="page_3" href="/page_3">click here</a> to go back to <code>/page_3</code>.</p>
-        <div class="force-scroll"></div>
-        <p><a data-router data-route="long_page_2" href="/long_page_2">Click here</a> to go to <code>/long_page_2</code>.</p>
-      </article>
-      <article data-page data-route="long_page_2">
-        <p class="subtitle">The scroll should have been reset to the top when you entered this page.</p>
-        <p>Single-page apps that do not explicitly implement this behavior would have you enter this page with the scroll bar already scrolled down (to match your scroll on <code>/long_page_1</code>).</p>
-        <div class="force-scroll"></div>
-        <p><a data-router data-route="long_page_1" href="/long_page_1">Click here</a> to go back to <code>/long_page_1</code>.</p>
-      </article>
-    </section>
+    <article data-page data-route="home">
+      <p class="subtitle">Hello from the home page! 🏠</p>
+      <p>This is the page at the root of the website.</p>
+      <p><a data-router data-route="page_1" href="/page_1">Click here</a> to go to <code>/page_1</code>, which is a completely different page from this one.</p>
+    </article>
+    <article data-page data-route="page_1">
+      <p class="subtitle">As promised, this is a completely different page.</p>
+      <p>Look at the URL path - it changed.</p>
+      <p>But this page loaded instantly. If you observe the network tab in DevTools, no network requests have been made.</p>
+      <p>And if you observe the DOM, only this <code>&lt;article&gt;</code> tag has changed.</p>
+      <p>How does this work? <a data-router data-route="page_2" href="/page_2">Click here</a> to go to <code>/page_2</code> and find out.</p>
+    </article>
+    <article data-page data-route="page_2">
+      <p class="subtitle">All the routing logic has been implemented client-side in JavaScript.</p>
+      <p>We've actually never left the root <code>index.html</code> page - check the source.</p>
+      <p>This behavior is the eponymous characteristic of an <dfn><abbr title="Single Page Application">SPA</abbr></dfn>.</p>
+      <p><a data-router data-route="page_3" href="/page_3">Click here</a> to go to <code>/page_3</code> and learn more.</p>
+    </article>
+    <article data-page data-route="page_3">
+      <p class="subtitle">There are a few important behaviors that are often overlooked when implementing client-side routing:</p>
+      <ul>
+        <li>The backward and forward buttons need to work as expected.</li>
+        <li>Direct links to specific pages need to work.</li>
+        <li>Middle click, <kbd>Ctrl</kbd> / <kbd>Cmd</kbd> click, <kbd>Shift</kbd> click, and "right click > open link in new tab" all need to work on links and link-like buttons as expected.</li>
+        <li>Invalid routes need to return <code>HTTP 404</code> errors (this behavior is critical for <dfn><abbr title="Search Engine Optimization">SEO</abbr></dfn>).</li>
+        <li>When hovering links and link-like buttons, the web browser's native status bar (typically shown at the bottom-left of the window) needs to show the destination address.</li>
+        <li>When navigating between long pages with scrollbars, the scroll should reset to the top of the page. <a data-router data-route="long_page_1" href="/long_page_1">Click here to see a demo</a>.</li>
+      </ul>
+      <p>The purpose of this website is to isolate the problem of client-side routing and provide a minimal reference implementation for it.</p>
+      <p>All the behaviors above have been implemented for this website in about 50 total lines of JavaScript.</p>
+      <p><a href="https://github.com/ardislu/minimal-routing">Click here</a> to view the source code on GitHub.</p>
+    </article>
+    <article data-page data-route="long_page_1">
+      <p class="subtitle">This page is intentionally oversized. Scroll down to go to <code>/long_page_2</code>.</p>
+      <p>Or <a data-router data-route="page_3" href="/page_3">click here</a> to go back to <code>/page_3</code>.</p>
+      <div class="force-scroll"></div>
+      <p><a data-router data-route="long_page_2" href="/long_page_2">Click here</a> to go to <code>/long_page_2</code>.</p>
+    </article>
+    <article data-page data-route="long_page_2">
+      <p class="subtitle">The scroll should have been reset to the top when you entered this page.</p>
+      <p>Single-page apps that do not explicitly implement this behavior would have you enter this page with the scroll bar already scrolled down (to match your scroll on <code>/long_page_1</code>).</p>
+      <div class="force-scroll"></div>
+      <p><a data-router data-route="long_page_1" href="/long_page_1">Click here</a> to go back to <code>/long_page_1</code>.</p>
+    </article>
   </main>
 
   <script>
     const routers = Array.from(document.querySelectorAll('[data-router]')); // Put into array to use .includes
-    const content = document.querySelector('section');
+    const content = document.querySelector('main');
     const pages = document.querySelectorAll('[data-page]');
 
     // Display the appropriate page based on the URL path (does NOT modify browser history)
