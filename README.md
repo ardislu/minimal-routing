@@ -2,6 +2,8 @@
 
 Demo website for the minimum JavaScript required to implement client-side routing.
 
+Code repository mirrors: [GitHub](https://github.com/ardislu/minimal-routing), [Codeberg](https://codeberg.org/ardislu/minimal-routing), [git.ardis.lu](https://git.ardis.lu/minimal-routing)
+
 ## Web server configuration
 
 This demo website assumes that the web server has been configured to serve `index.html` on all routes **EXCEPT** for the special path: `/errors/NotFound`. For `/errors/NotFound`, the web server must respond with a `404 Not Found` error and the file `/errors/404.html`.
