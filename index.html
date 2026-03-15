@@ -149,7 +149,7 @@
         <li>When navigating between long pages with scrollbars, the scroll should reset to the top of the page. <a data-router data-route="long_page_1" href="/long_page_1">Click here to see a demo</a>.</li>
       </ul>
       <p>The purpose of this website is to isolate the problem of client-side routing and provide a minimal reference implementation for it.</p>
-      <p>All the behaviors above have been implemented for this website in about 50 total lines of JavaScript.</p>
+      <p>All the behaviors above have been implemented for this website in about 40 total lines of JavaScript using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API">Navigation API</a> (new as of January 2026).</p>
       <p><a href="https://github.com/ardislu/minimal-routing">Click here</a> to view the source code on GitHub.</p>
     </article>
     <article data-page data-route="long_page_1">
@@ -190,40 +190,25 @@
       if (!match) {
         // MUST redirect to a page where the web server serves an actual 404 error (i.e. not just 
         // index.html again) otherwise this triggers an infinite loop
-        location.href = `${location.origin}/errors/NotFound`;
+        navigation.navigate(`${location.origin}/errors/NotFound`);
       }
     }
 
-    // Update the browser history, then show page
-    function route(path) {
-      // If the new page is equal to the current page, don't do anything
-      if (location.pathname.substring(1) === path) {
+    // https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API
+    navigation.addEventListener('navigate', e => {
+      if (!e.canIntercept || e.hashChange || e.downloadRequest !== null) {
         return;
       }
+      const url = new URL(e.destination.url);
+      e.intercept({
+        handler() {
+          showPage(url.pathname.substring(1));
+          // Must reset scroll otherwise a user entering a long page from another long page will enter midway scrolled
+          scroll(0, 0);
+        }
+      })
+    })
 
-      const url = new URL(path, location.origin);
-      history.pushState({}, '', url);
-
-      showPage(path);
-      // Must reset scroll otherwise a user entering a long page from another long page will enter midway scrolled
-      scroll(0, 0);
-    }
-
-    // Set event handlers
-    addEventListener('click', e => {
-      if (!routers.includes(e.target)) {
-        return;
-      }
-      if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) {
-        return; // Use default behavior if any keyboard modifier is applied to the click
-      }
-
-      e.preventDefault();
-      route(e.target.dataset.route);
-    });
-    addEventListener('popstate', _ => showPage(location.pathname.substring(1)));
-
-    // Show the current URL (to support direct linking aka deep links)
     showPage(location.pathname.substring(1));
   </script>
 </body>

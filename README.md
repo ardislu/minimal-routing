@@ -1,6 +1,6 @@
 # minimal-routing
 
-Demo website for the minimum JavaScript required to implement client-side routing.
+Demo website for the minimum JavaScript required to implement client-side routing using the [Navigation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API) (new as of January 2026).
 
 Code repository mirrors: [GitHub](https://github.com/ardislu/minimal-routing), [Codeberg](https://codeberg.org/ardislu/minimal-routing), [git.ardis.lu](https://git.ardis.lu/minimal-routing)
 
