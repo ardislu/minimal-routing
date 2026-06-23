@@ -200,6 +200,9 @@
         return;
       }
       const url = new URL(e.destination.url);
+      if (new URLPattern({ pathname: '/errors/*' }).test(url)) { // Defer to normal navigation and let web server serve the error
+        return;
+      }
       e.intercept({
         handler() {
           showPage(url.pathname);
